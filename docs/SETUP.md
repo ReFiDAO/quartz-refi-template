@@ -12,13 +12,40 @@ Complete guide to setting up your Quartz ReFi website from this template.
 ## Step 1: Fork the Template
 
 1. Go to https://github.com/ReFiDAO/quartz-refi-template
-2. Click "Use this template"
-3. Create a new repository with your desired name
-4. Clone your new repository locally
+2. Click **Fork**
+3. Choose your organization/account and repository name
+4. Clone your new repository locally (HTTPS recommended)
 
 ```bash
 git clone https://github.com/your-org/your-repo.git
 cd your-repo
+```
+
+### Step 1.5 (Recommended): Connect to upstream template (copy/paste)
+
+This makes it easy to pull updates from the template later.
+
+```bash
+# Add upstream (template source)
+git remote add upstream https://github.com/ReFiDAO/quartz-refi-template.git
+
+# Verify
+git remote -v
+```
+
+If you see an SSH URL like `git@github.com:...` and you want the simplest flow, set HTTPS:
+
+```bash
+git remote set-url origin https://github.com/your-org/your-repo.git
+```
+
+When you want to pull template updates later:
+
+```bash
+git fetch upstream
+git checkout main
+git merge upstream/main
+git push origin main
 ```
 
 ## Step 2: Run Setup Script
@@ -32,6 +59,9 @@ npm run setup
 
 The script will prompt you for:
 
+- **Preset**: Choose a preset (theme + layout + starter content). See:
+  - `docs/PRESETS.md`
+  - `docs/ELEMENTS-CATALOG.md`
 - **Site name**: Your website name (e.g., "ReFi Barcelona")
 - **Base URL**: Your domain (e.g., "refibcn.cat")
 - **Default locale**: Default language (e.g., "en-US")

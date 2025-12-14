@@ -12,9 +12,32 @@ A modular template repository for creating Quartz-based websites for ReFi local 
 
 ## Quick Start
 
-### 1. Use This Template
+### 1. Fork the Template (Recommended)
 
-Click **"Use this template"** button on GitHub to create your repository.
+Go to the template repo on GitHub and click **Fork** to create your own copy.
+
+Why fork (instead of “Use this template”)? Forks keep a visible upstream relationship so your repo can reliably receive template updates.
+
+#### Optional but Recommended: enable upstream sync (copy/paste)
+
+After you clone your repo locally, run:
+
+```bash
+# Add upstream (template source)
+git remote add upstream https://github.com/ReFiDAO/quartz-refi-template.git
+
+# Verify
+git remote -v
+```
+
+To pull template updates later:
+
+```bash
+git fetch upstream
+git checkout main
+git merge upstream/main
+git push origin main
+```
 
 ### 2. Run Setup Script
 

@@ -1,0 +1,46 @@
+---
+title: "{{SITE_NAME}}"
+description: "A collaborative funding round connecting local regenerative projects with global Web3 infrastructure."
+---
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>Powering Regeneration in Catalonia</h1>
+    <p class="hero-text">
+      A participatory funding round connecting local regenerative projects with global Web3 infrastructure.
+    </p>
+    <div class="hero-cta">
+      <a href="/program/project-guidebook" class="cta-button">For projects</a>
+      <a href="#get-involved" class="cta-button">Get involved</a>
+    </div>
+  </div>
+</div>
+
+<div class="section-container section-container-tinted">
+  <div class="section-content-centered">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-subtitle">
+      Use this preset when you need a program-style information architecture and more structured landing pages.
+    </p>
+    <div class="two-col-grid" style="margin-top: 1.5rem;">
+      <div class="grid-item" style="background: var(--accent-highlight);">
+        <strong>Phase 1</strong>
+        <p style="margin-bottom: 0;">Baseline allocation + lightweight reporting.</p>
+      </div>
+      <div class="grid-item" style="background: var(--accent-highlight);">
+        <strong>Phase 2</strong>
+        <p style="margin-bottom: 0;">Network-level governance and collective allocation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="get-involved">
+  <div class="section-content-centered">
+    <h2 class="section-title">Get involved</h2>
+    <p class="section-subtitle">
+      Add the next steps: project onboarding, supporter onboarding, calls, and key dates.
+    </p>
+  </div>
+</div>
+

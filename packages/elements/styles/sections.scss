@@ -1,0 +1,146 @@
+// Shared section + element classes for ReFi Quartz sites
+// Uses canonical accent tokens:
+//   --accent-dark, --accent-medium, --accent-light, --accent-highlight
+
+:root {
+  // Shared layout primitives (safe defaults; presets can override)
+  --layout-inline: var(--layout-inline, clamp(1.5rem, 5vw, 3.5rem));
+  --page-max-width: var(--page-max-width, 800px);
+}
+
+// Helpers (fallback chain allows older themes to work)
+@function accent($name, $fallback) {
+  @return var(#{$name}, var(--primary-#{$fallback}, var(--blue-#{$fallback}, #092045)));
+}
+
+// ---------------------------------------------------------------------------
+// Buttons
+// ---------------------------------------------------------------------------
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  color: var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  background: var(--light);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-button:hover {
+  background: var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  color: var(--light);
+}
+
+// ---------------------------------------------------------------------------
+// Sections / grids
+// ---------------------------------------------------------------------------
+
+.section-container {
+  margin: 2.5rem 0;
+  padding: 2rem 0;
+  border-top: 2px solid var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+}
+
+.section-container-tinted,
+.section-tinted {
+  background: var(--accent-highlight, rgba(9, 32, 69, 0.08));
+}
+
+.section-narrow {
+  padding-left: var(--layout-inline);
+  padding-right: var(--layout-inline);
+}
+
+.section-content-centered {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-inline);
+}
+
+.section-content-wide {
+  max-width: calc(var(--page-max-width) * 1.25);
+  margin: 0 auto;
+  padding: 0 var(--layout-inline);
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--darkgray);
+  line-height: 1.7;
+}
+
+.two-col-grid,
+.three-col-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.two-col-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.three-col-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .three-col-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .two-col-grid,
+  .three-col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-item {
+  border: 2px solid var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  background: var(--light);
+  padding: 1.25rem;
+}
+
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem 0 1rem;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-inline);
+}
+
+.hero-text {
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--darkgray);
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+

@@ -6,6 +6,31 @@ Complete catalog of available packages for the Quartz ReFi template.
 
 The template uses a modular package system. You can select which packages to install during setup.
 
+## Presets (Theme + Layout + Starter Content)
+
+**Status:** Selected during setup  
+**Purpose:** Presets are curated combinations that control the initial generated files:
+- `quartz.config.ts` (colors/typography defaults)
+- `quartz.layout.ts` (header/footer composition)
+- `quartz/styles/custom.scss` (theme tokens + styles)
+- optional component overrides in `quartz/components/`
+- optional starter `content/index.md`
+
+**Files:**
+- `packages/presets/*`
+
+See `docs/PRESETS.md`.
+
+## Elements (Reusable Sections + Behaviors)
+
+**Status:** Installed automatically by setup  
+**Purpose:** Shared section classes and optional JS behaviors used across presets.
+
+**Files:**
+- `packages/elements/*`
+
+See `docs/ELEMENTS-CATALOG.md`.
+
 ## Core Package
 
 **Status:** Always Included  

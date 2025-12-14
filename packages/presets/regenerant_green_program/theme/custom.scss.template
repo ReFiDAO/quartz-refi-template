@@ -1,0 +1,20 @@
+@use "./base.scss";
+@use "./elements/sections.scss";
+@use "./elements/toolkit-layout.scss";
+
+// Regenerant Catalunya preset (green program)
+:root {
+  --accent-dark: #214033;
+  --accent-medium: #3a6655;
+  --accent-light: #568f79;
+  --accent-highlight: rgba(33, 64, 51, 0.15);
+
+  // Partner accent colors (optional)
+  --miceli-terracotta: #8b5a3c;
+  --miceli-terracotta-light: rgba(139, 90, 60, 0.15);
+  --fundicio-purple: #6b4ea3;
+  --fundicio-purple-light: rgba(107, 78, 163, 0.15);
+
+  --page-max-width: 72rem;
+}
+

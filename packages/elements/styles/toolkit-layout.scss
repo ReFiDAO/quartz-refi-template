@@ -1,0 +1,108 @@
+// Toolkit layout preset styles (fixed top bar, strong borders, no-radius look)
+// Depends on canonical accent tokens:
+//   --accent-dark, --accent-medium, --accent-light, --accent-highlight
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+:root {
+  --layout-inline: var(--layout-inline, clamp(1.5rem, 5vw, 3.5rem));
+  --page-max-width: var(--page-max-width, 800px);
+
+  --action-btn-size: var(--action-btn-size, 46px);
+  --action-btn-border-width: var(--action-btn-border-width, 1.5px);
+  --action-btn-border: var(--action-btn-border, var(--action-btn-border-width) solid var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045))));
+  --action-btn-bg: var(--action-btn-bg, color-mix(in srgb, var(--light) 95%, rgba(255, 255, 255, 0.6)));
+  --action-btn-bg-hover: var(--action-btn-bg-hover, color-mix(in srgb, var(--light) 88%, rgba(255, 255, 255, 0.8)));
+  --action-btn-shadow: var(--action-btn-shadow, 0 15px 35px rgba(9, 32, 69, 0.17));
+}
+
+.navigation {
+  border-color: var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+
+  a:hover {
+    color: var(--accent-light, var(--primary-light, var(--blue-light, #2e5491))) !important;
+  }
+}
+
+article {
+  a {
+    color: var(--accent-medium, var(--primary-medium, var(--blue-medium, #1a3a6b)));
+    &:hover {
+      color: var(--accent-light, var(--primary-light, var(--blue-light, #2e5491)));
+    }
+  }
+
+  .section-container {
+    border-color: var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  }
+
+  .popover > .popover-inner {
+    border-color: var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045))) !important;
+  }
+}
+
+body {
+  padding-top: 60px; // account for fixed header
+  background-color: var(--light);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+
+  @media (max-width: 640px) {
+    font-size: 1rem;
+    padding-top: 55px;
+  }
+}
+
+.page,
+#quartz-body {
+  max-width: var(--page-max-width) !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+
+  @media (max-width: 639px) {
+    padding: 0 1rem !important;
+  }
+}
+
+// Fixed top bar (header)
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--light);
+  width: 100%;
+  max-width: calc(100% - 3rem);
+  margin: 0.5rem auto 0;
+  border: 1.5px solid var(--accent-dark, var(--primary-dark, var(--blue-dark, #092045)));
+  padding: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+
+  @media (max-width: 640px) {
+    max-width: calc(100% - 1rem);
+    padding: 0.5rem 1rem;
+  }
+}
+

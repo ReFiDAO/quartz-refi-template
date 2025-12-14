@@ -1,0 +1,18 @@
+---
+title: Welcome
+description: "{{SITE_NAME}} website"
+---
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>{{SITE_NAME}}</h1>
+    <p class="hero-text">
+      A network society to regenerate the earth. Replace this with your community’s purpose and top links.
+    </p>
+    <div class="hero-cta">
+      <a href="/community" class="cta-button">Community</a>
+      <a href="/resources-hub" class="cta-button">Resources</a>
+    </div>
+  </div>
+</div>
+

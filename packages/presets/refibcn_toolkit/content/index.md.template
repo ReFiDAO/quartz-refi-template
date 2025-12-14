@@ -1,0 +1,36 @@
+---
+title: Welcome
+description: "{{SITE_NAME}} website"
+---
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>{{SITE_NAME}}</h1>
+    <p class="hero-text">
+      A local node of regenerative finance. Replace this with your node’s mission and a clear call-to-action.
+    </p>
+    <div class="hero-cta">
+      <a href="#about" class="cta-button">About</a>
+      <a href="#contact" class="cta-button">Contact</a>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="about">
+  <div class="section-content-centered">
+    <h2 class="section-title">About</h2>
+    <p class="section-subtitle">
+      Add a short description of your node, what you do, and who it’s for.
+    </p>
+  </div>
+</div>
+
+<div class="section-container" id="contact">
+  <div class="section-content-centered">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-subtitle">
+      Add an email or link: <a href="mailto:hello@example.com">hello@example.com</a>
+    </p>
+  </div>
+</div>
+

@@ -1,0 +1,36 @@
+---
+title: Welcome
+description: "{{SITE_NAME}} website"
+---
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>{{SITE_NAME}}</h1>
+    <p class="hero-text">
+      Regenerative finance across the Mediterranean bioregion. Replace this with your node’s mission.
+    </p>
+    <div class="hero-cta">
+      <a href="#about" class="cta-button">About</a>
+      <a href="#get-involved" class="cta-button">Get involved</a>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="about">
+  <div class="section-content-centered">
+    <h2 class="section-title">About</h2>
+    <p class="section-subtitle">
+      Describe your region, your community, and what you support.
+    </p>
+  </div>
+</div>
+
+<div class="section-container" id="get-involved">
+  <div class="section-content-centered">
+    <h2 class="section-title">Get involved</h2>
+    <p class="section-subtitle">
+      Add clear next steps: join a call, sign up for a newsletter, or contribute to projects.
+    </p>
+  </div>
+</div>
+

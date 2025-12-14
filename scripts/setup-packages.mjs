@@ -21,6 +21,31 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const rootDir = join(__dirname, "..")
 
+const UPSTREAM_REPO = "https://github.com/ReFiDAO/quartz-refi-template.git"
+
+const PRESETS = {
+  refibcn_toolkit: {
+    name: "ReFi BCN Toolkit (blue)",
+    description: "Fixed header + strong borders + sand background",
+  },
+  refiprovence_toolkit: {
+    name: "ReFi Provence Toolkit (blue)",
+    description: "Same Toolkit structure (blue) — small local node default",
+  },
+  refimediterranean_ocean: {
+    name: "ReFi Mediterranean (ocean)",
+    description: "Toolkit structure + Mediterranean ocean palette",
+  },
+  regenerant_green_program: {
+    name: "Regenerant (green program)",
+    description: "Program-style IA + wider layout + carousel-ready Body",
+  },
+  refidao_dark_gradient: {
+    name: "ReFi DAO (dark gradient)",
+    description: "Dark-by-default + gradients + Profile menu",
+  },
+}
+
 const PACKAGES = {
   core: {
     name: "Core",
@@ -57,56 +82,81 @@ const PACKAGES = {
 async function main() {
   intro("Quartz ReFi Template - Package Setup")
 
+  const presetId =
+    (process.env.QUARTZ_PRESET && PRESETS[process.env.QUARTZ_PRESET] ? process.env.QUARTZ_PRESET : null) ||
+    (await select({
+      message: "Choose a site preset:",
+      options: Object.entries(PRESETS).map(([value, preset]) => ({
+        value,
+        label: `${preset.name} - ${preset.description}`,
+      })),
+    }))
+
+  if (isCancel(presetId)) {
+    cancel("Setup cancelled.")
+    process.exit(0)
+  }
+
   // Collect site information
-  const siteName = await text({
-    message: "What is your site name?",
-    placeholder: "My ReFi Node",
-    initialValue: "My ReFi Node",
-  })
+  const siteName =
+    process.env.QUARTZ_SITE_NAME ||
+    (await text({
+      message: "What is your site name?",
+      placeholder: "My ReFi Node",
+      initialValue: "My ReFi Node",
+    }))
 
   if (isCancel(siteName)) {
     cancel("Setup cancelled.")
     process.exit(0)
   }
 
-  const baseUrl = await text({
-    message: "What is your site's base URL? (without https://)",
-    placeholder: "example.com",
-    initialValue: "example.com",
-  })
+  const baseUrl =
+    process.env.QUARTZ_BASE_URL ||
+    (await text({
+      message: "What is your site's base URL? (without https://)",
+      placeholder: "example.com",
+      initialValue: "example.com",
+    }))
 
   if (isCancel(baseUrl)) {
     cancel("Setup cancelled.")
     process.exit(0)
   }
 
-  const defaultLocale = await text({
-    message: "Default locale?",
-    placeholder: "en-US",
-    initialValue: "en-US",
-  })
+  const defaultLocale =
+    process.env.QUARTZ_LOCALE ||
+    (await text({
+      message: "Default locale?",
+      placeholder: "en-US",
+      initialValue: "en-US",
+    }))
 
   if (isCancel(defaultLocale)) {
     cancel("Setup cancelled.")
     process.exit(0)
   }
 
-  const githubOrg = await text({
-    message: "GitHub organization/username?",
-    placeholder: "your-org",
-    initialValue: "",
-  })
+  const githubOrg =
+    process.env.QUARTZ_GITHUB_ORG ||
+    (await text({
+      message: "GitHub organization/username?",
+      placeholder: "your-org",
+      initialValue: "",
+    }))
 
   if (isCancel(githubOrg)) {
     cancel("Setup cancelled.")
     process.exit(0)
   }
 
-  const githubRepo = await text({
-    message: "GitHub repository name?",
-    placeholder: "your-repo",
-    initialValue: "",
-  })
+  const githubRepo =
+    process.env.QUARTZ_GITHUB_REPO ||
+    (await text({
+      message: "GitHub repository name?",
+      placeholder: "your-repo",
+      initialValue: "",
+    }))
 
   if (isCancel(githubRepo)) {
     cancel("Setup cancelled.")
@@ -134,8 +184,14 @@ async function main() {
 
   console.log("\n📦 Installing packages...")
 
+  // Shared element library (styles + optional behaviors)
+  installElementsPackage()
+
+  // Preset overrides (optional components/scripts)
+  installPresetOverrides(presetId)
+
   // Install core package (always)
-  installCorePackage(siteName, baseUrl, defaultLocale, githubOrg, githubRepo)
+  installCorePackage(siteName, baseUrl, defaultLocale, githubOrg, githubRepo, presetId)
 
   // Install optional packages
   for (const pkg of packagesToInstall) {
@@ -146,10 +202,28 @@ async function main() {
   }
 
   // Install theme package
-  installThemePackage()
+  installThemePackage(presetId)
+
+  // Install preset starter content if present
+  installPresetContent(presetId, siteName)
 
   // Update package.json scripts
   updatePackageJsonScripts(packagesToInstall)
+
+  // Optional: configure upstream remote (manual workflow, but beginner-friendly)
+  const shouldAddUpstream = await confirm({
+    message: "Set up upstream sync remote (recommended)?",
+    initialValue: true,
+  })
+
+  if (isCancel(shouldAddUpstream)) {
+    cancel("Setup cancelled.")
+    process.exit(0)
+  }
+
+  if (shouldAddUpstream) {
+    tryAddUpstreamRemote()
+  }
 
   outro("✨ Setup complete! Run 'npm install' to install dependencies.")
 
@@ -160,15 +234,106 @@ async function main() {
     defaultLocale,
     githubOrg,
     githubRepo,
+    preset: presetId,
     packages: packagesToInstall,
   }
   writeFileSync(join(rootDir, "setup-config.json"), JSON.stringify(config, null, 2))
 }
 
-function installCorePackage(siteName, baseUrl, locale, githubOrg, githubRepo) {
-  // Copy template files
-  const configTemplate = readFileSync(join(rootDir, "packages/core/quartz.config.ts.template"), "utf-8")
-  const layoutTemplate = readFileSync(join(rootDir, "packages/core/quartz.layout.ts.template"), "utf-8")
+function tryAddUpstreamRemote() {
+  try {
+    execSync("git rev-parse --is-inside-work-tree", { cwd: rootDir, stdio: "ignore" })
+  } catch {
+    console.log("\nℹ️  Git repository not detected. Skipping upstream remote setup.")
+    return
+  }
+
+  let remotes = ""
+  try {
+    remotes = execSync("git remote -v", { cwd: rootDir, encoding: "utf-8" })
+  } catch {
+    console.log("\nℹ️  Could not read git remotes. Skipping upstream remote setup.")
+    return
+  }
+
+  if (remotes.includes("upstream")) {
+    console.log("\n✅ Upstream remote already configured.")
+    return
+  }
+
+  try {
+    console.log("\n📡 Adding upstream remote...")
+    execSync(`git remote add upstream ${UPSTREAM_REPO}`, { cwd: rootDir, stdio: "inherit" })
+    console.log("✅ Upstream remote configured.")
+  } catch (error) {
+    console.log("\n⚠️  Could not add upstream remote automatically.")
+    console.log(`You can add it manually with:\n  git remote add upstream ${UPSTREAM_REPO}`)
+    console.log(`Reason: ${error?.message ?? "unknown"}`)
+  }
+}
+
+function installElementsPackage() {
+  const elementsStylesDir = join(rootDir, "quartz", "styles", "elements")
+  if (!existsSync(elementsStylesDir)) mkdirSync(elementsStylesDir, { recursive: true })
+
+  const elementsPkgDir = join(rootDir, "packages", "elements")
+  const sectionsSrc = join(elementsPkgDir, "styles", "sections.scss")
+  const toolkitSrc = join(elementsPkgDir, "styles", "toolkit-layout.scss")
+
+  if (existsSync(sectionsSrc)) {
+    cpSync(sectionsSrc, join(elementsStylesDir, "sections.scss"))
+  }
+  if (existsSync(toolkitSrc)) {
+    cpSync(toolkitSrc, join(elementsStylesDir, "toolkit-layout.scss"))
+  }
+
+  // Optional behaviors (copied but only used if components import them)
+  const scriptsSrcDir = join(elementsPkgDir, "scripts")
+  const componentsScriptsDir = join(rootDir, "quartz", "components", "scripts")
+  if (!existsSync(componentsScriptsDir)) mkdirSync(componentsScriptsDir, { recursive: true })
+
+  const carouselSrc = join(scriptsSrcDir, "carousel.inline.ts")
+  if (existsSync(carouselSrc)) {
+    cpSync(carouselSrc, join(componentsScriptsDir, "carousel.inline.ts"))
+  }
+}
+
+function installPresetOverrides(presetId) {
+  const presetComponentsDir = join(rootDir, "packages", "presets", presetId, "components")
+  const destComponentsDir = join(rootDir, "quartz", "components")
+  if (!existsSync(presetComponentsDir)) return
+  if (!existsSync(destComponentsDir)) mkdirSync(destComponentsDir, { recursive: true })
+  cpSync(presetComponentsDir, destComponentsDir, { recursive: true, force: true })
+}
+
+function installPresetContent(presetId, siteName) {
+  const presetContentTemplate = join(rootDir, "packages", "presets", presetId, "content", "index.md.template")
+  if (!existsSync(presetContentTemplate)) return
+
+  const contentDir = join(rootDir, "content")
+  if (!existsSync(contentDir)) mkdirSync(contentDir, { recursive: true })
+
+  const indexPath = join(contentDir, "index.md")
+  if (existsSync(indexPath)) return
+
+  const template = readFileSync(presetContentTemplate, "utf-8")
+  const rendered = template.replace(/\{\{SITE_NAME\}\}/g, siteName)
+  writeFileSync(indexPath, rendered)
+}
+
+function installCorePackage(siteName, baseUrl, locale, githubOrg, githubRepo, presetId) {
+  const presetCoreDir = join(rootDir, "packages", "presets", presetId, "core")
+  const defaultCoreDir = join(rootDir, "packages", "core")
+
+  const configTemplatePath = existsSync(join(presetCoreDir, "quartz.config.ts.template"))
+    ? join(presetCoreDir, "quartz.config.ts.template")
+    : join(defaultCoreDir, "quartz.config.ts.template")
+  const layoutTemplatePath = existsSync(join(presetCoreDir, "quartz.layout.ts.template"))
+    ? join(presetCoreDir, "quartz.layout.ts.template")
+    : join(defaultCoreDir, "quartz.layout.ts.template")
+
+  const configTemplate = readFileSync(configTemplatePath, "utf-8")
+  const layoutTemplate = readFileSync(layoutTemplatePath, "utf-8")
 
   // Replace placeholders
   let config = configTemplate
@@ -299,9 +464,11 @@ function installOgImagesPackage() {
   console.log("⚠️  Note: OG image generation can slow down builds significantly")
 }
 
-function installThemePackage() {
-  // Copy theme template
-  const themeTemplate = join(rootDir, "packages/theme/styles/custom.scss.template")
+function installThemePackage(presetId) {
+  const presetThemeTemplate = join(rootDir, "packages", "presets", presetId, "theme", "custom.scss.template")
+  const themeTemplate = existsSync(presetThemeTemplate)
+    ? presetThemeTemplate
+    : join(rootDir, "packages", "theme", "styles", "custom.scss.template")
   if (existsSync(themeTemplate)) {
     const stylesDir = join(rootDir, "quartz", "styles")
     if (!existsSync(stylesDir)) mkdirSync(stylesDir, { recursive: true })

@@ -1,0 +1,14 @@
+@use "./base.scss";
+@use "./elements/sections.scss";
+@use "./elements/toolkit-layout.scss";
+
+// ReFi Mediterranean preset (ocean)
+:root {
+  --accent-dark: #0d4a6b;
+  --accent-medium: #1e7a9f;
+  --accent-light: #4ab3d9;
+  --accent-highlight: rgba(30, 122, 159, 0.15);
+
+  --page-max-width: 800px;
+}
+

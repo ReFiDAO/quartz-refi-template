@@ -1,0 +1,45 @@
+@use "./base.scss";
+@use "./elements/sections.scss";
+
+/* ReFi DAO preset: dark-by-default + gradients */
+:root {
+  color-scheme: dark;
+
+  // Canonical accent tokens
+  --accent-dark: #3b82f6; /* blue */
+  --accent-medium: #8b5cf6; /* purple */
+  --accent-light: #60a5fa; /* light blue */
+  --accent-highlight: rgba(59, 130, 246, 0.15);
+
+  /* Override Quartz colors (dark mode default) */
+  --light: #000000;
+  --lightgray: #0a0a0a;
+  --gray: #6b7280;
+  --darkgray: #9ca3af;
+  --dark: #f1f0ff;
+  --secondary: #3b82f6;
+  --tertiary: #8b5cf6;
+  --highlight: rgba(59, 130, 246, 0.15);
+  --textHighlight: rgba(139, 92, 246, 0.25);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  --gradient-accent: linear-gradient(135deg, #06b6d4, #8b5cf6);
+  --gradient-warm: linear-gradient(135deg, #fbbf24, #f472b6);
+}
+
+/* Light mode override (when user toggles) */
+:root[saved-theme="light"] {
+  color-scheme: light;
+
+  --light: #ffffff;
+  --lightgray: #f9fafb;
+  --gray: #9ca3af;
+  --darkgray: #4b5563;
+  --dark: #172027;
+  --secondary: #3b82f6;
+  --tertiary: #8b5cf6;
+  --highlight: rgba(139, 92, 246, 0.15);
+  --textHighlight: rgba(59, 130, 246, 0.25);
+}
+
