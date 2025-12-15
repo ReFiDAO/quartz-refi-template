@@ -96,7 +96,31 @@ This creates `.cursorrules/` directory with site-specific context.
 
 ## Step 5: Customize Your Site
 
-### Update Content
+### Recommended: Questionnaire-Based Development
+
+For comprehensive node websites, we recommend using the **questionnaire-based development workflow**:
+
+1. **Complete the Questionnaire**: Fill out `docs/QUESTIONNAIRE.md` with your site information
+2. **Follow the Workflow Guide**: Use [Questionnaire-Based Development Workflow](QUESTIONNAIRE-WORKFLOW.md) for step-by-step implementation
+3. **Reference Examples**: See [Examples](EXAMPLES.md) for reference implementations like ReFi Mediterranean
+
+This approach ensures:
+- Systematic configuration from questionnaire answers
+- Complete content development from questionnaire sections
+- Proper asset organization
+- Multi-language setup (if needed)
+- Deployment best practices
+
+**Quick Start with Questionnaire:**
+- Complete sections 1-3 for basic site setup
+- Add content sections 4-6 as you develop
+- Follow [QUESTIONNAIRE-WORKFLOW.md](QUESTIONNAIRE-WORKFLOW.md) to implement
+
+### Manual Customization (Alternative)
+
+If you prefer to customize manually:
+
+#### Update Content
 
 Edit `content/index.md` for your homepage:
 
@@ -110,7 +134,7 @@ title: Welcome
 Your homepage content here...
 ```
 
-### Customize Theme
+#### Customize Theme
 
 Edit `quartz/styles/custom.scss` to change colors:
 
@@ -122,7 +146,7 @@ Edit `quartz/styles/custom.scss` to change colors:
 }
 ```
 
-### Configure Site Settings
+#### Configure Site Settings
 
 Edit `quartz.config.ts`:
 
@@ -226,9 +250,12 @@ GitHub Actions will automatically build and deploy your site.
 
 ## Next Steps
 
-- Read [Package Documentation](PACKAGES.md) for package details
-- Read [Upstream Sync Guide](UPSTREAM-SYNC.md) to stay updated
-- Read [Contributing Guide](CONTRIBUTING.md) to contribute back
+- **For comprehensive sites**: Follow [Questionnaire-Based Development Workflow](QUESTIONNAIRE-WORKFLOW.md)
+- **See examples**: Check [Examples](EXAMPLES.md) for reference implementations
+- **Content templates**: Use [Content Templates](CONTENT-TEMPLATES.md) for page structures
+- **Package details**: Read [Package Documentation](PACKAGES.md) for package features
+- **Stay updated**: Read [Upstream Sync Guide](UPSTREAM-SYNC.md) to pull template updates
+- **Contribute**: Read [Contributing Guide](CONTRIBUTING.md) to contribute back
 
 ## Getting Help
 

@@ -428,10 +428,31 @@ After completing this questionnaire:
 
 1. **Upload assets** — Add your images to the `assets/` folder
 2. **Add documentation** — Put any reference materials in the `docs/` folder
-3. **Share your responses** — Send this completed document
-4. **Schedule a call** (optional) — Walk through any questions together
-5. **Review draft** — We'll create a first version for your feedback
-6. **Launch!** — Deploy your website
+3. **Follow the Workflow Guide** — Use [Questionnaire-Based Development Workflow](QUESTIONNAIRE-WORKFLOW.md) to build your site systematically
+4. **Reference Examples** — See [Examples](EXAMPLES.md) for reference implementations like ReFi Mediterranean
+5. **Schedule a call** (optional) — Walk through any questions together
+6. **Review and iterate** — Build incrementally, starting with essentials (sections 1-3)
+7. **Launch!** — Deploy your website
+
+### Implementation Guide
+
+The [Questionnaire-Based Development Workflow](QUESTIONNAIRE-WORKFLOW.md) provides:
+
+- **Phase-by-phase implementation** - Step-by-step guide from questionnaire to deployed site
+- **Configuration mapping** - How questionnaire answers map to configuration files
+- **Content development** - How to create pages from questionnaire sections
+- **Asset processing** - How to organize and integrate visual assets
+- **Deployment** - GitHub Pages setup and configuration
+- **Troubleshooting** - Common issues and solutions
+
+### Reference Implementation
+
+See [ReFi Mediterranean](https://github.com/ReFiDAO/ReFi-Mediterranean) as a complete example:
+
+- **Repository**: https://github.com/ReFiDAO/ReFi-Mediterranean
+- **Live Site**: https://refidao.github.io/ReFi-Mediterranean
+- **Questionnaire**: See `docs/QUESTIONNAIRE.md` in the repository
+- **Implementation**: Follows the full questionnaire-based workflow
 
 ---
 

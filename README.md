@@ -97,6 +97,10 @@ See [docs/PACKAGES.md](docs/PACKAGES.md) for detailed package documentation.
 ## Documentation
 
 - [Setup Guide](docs/SETUP.md) - Detailed setup instructions
+- [Questionnaire-Based Development Workflow](docs/QUESTIONNAIRE-WORKFLOW.md) - Complete guide for building sites from questionnaire
+- [Questionnaire](docs/QUESTIONNAIRE.md) - Site customization questionnaire
+- [Examples](docs/EXAMPLES.md) - Reference implementations (ReFi Mediterranean, etc.)
+- [Content Templates](docs/CONTENT-TEMPLATES.md) - Ready-to-use content structures
 - [Package Documentation](docs/PACKAGES.md) - Complete package catalog
 - [Upstream Sync Guide](docs/UPSTREAM-SYNC.md) - How to sync from template
 - [Contributing Guide](docs/CONTRIBUTING.md) - How to contribute back
