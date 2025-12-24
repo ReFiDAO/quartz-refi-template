@@ -4,11 +4,13 @@ A modular template repository for creating Quartz-based websites for ReFi local 
 
 ## Features
 
-- **Modular Package System**: Choose only the features you need
+- **Modular Package System**: Choose only the features you need (Analytics, Multilang, etc.)
+- **Operator Pathways**: Specialized workflows for Strategists, Builders, and AI-Augmented operators
+- **Intelligence Layer**: Granular Cursor rules to guide AI-assisted maintenance and development
+- **Feature Library**: Comprehensive catalog of reusable UI elements and behaviors
 - **Easy Customization**: Theme colors, fonts, and layout easily customizable
 - **Upstream Sync**: Stay updated with template improvements
 - **Best Practices**: Built-in best practices for Quartz configuration
-- **Cursor Rules**: Pre-configured cursor rules for easier development
 
 ## Quick Start
 
@@ -96,6 +98,8 @@ See [docs/PACKAGES.md](docs/PACKAGES.md) for detailed package documentation.
 
 ## Documentation
 
+- [Operator Guidebook](docs/OPERATOR-GUIDEBOOK.md) - **Start Here**: Choose your pathway (Strategist, Builder, or AI)
+- [Feature Library](docs/LIBRARY.md) - **The "Store"**: Modular packages, UI elements, and AI modules
 - [Setup Guide](docs/SETUP.md) - Detailed setup instructions
 - [Questionnaire-Based Development Workflow](docs/QUESTIONNAIRE-WORKFLOW.md) - Complete guide for building sites from questionnaire
 - [Questionnaire](docs/QUESTIONNAIRE.md) - Site customization questionnaire

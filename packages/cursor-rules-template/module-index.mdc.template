@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+description: Central index for all Cursor rules and modular features
+---
+
+# ReFi Template Intelligence Layer
+
+This index maps the available context modules for this repository.
+
+## 1. Context Modules (.mdc rules)
+- **`project-context.mdc`**: Mission, team, and organization goals.
+- **`site-structure.mdc`**: Repository organization and technical workflow.
+- **`feature-library.mdc`**: UI elements, grids, and modular packages.
+- **`operator-guidebook.mdc`**: Strategic pathways and AI-collaboration guidance.
+- **`site-customization.mdc`**: Theme-specific design system details.
+- **`upstream-sync.mdc`**: Maintenance and template updates.
+
+## 2. Key Documentation
+- `docs/LIBRARY.md`: The central index of all modular features.
+- `docs/OPERATOR-GUIDEBOOK.md`: The manual for operators and strategists.
+- `docs/QUESTIONNAIRE.md`: The site's blueprint.
+- `docs/SETUP.md`: Initial technical setup guide.
+
+## 3. Core Modules (Packages)
+- **Core / Theme**: Essential framework.
+- **Optional**: Multilang, Analytics, Comments, OG-Images.
+
+

@@ -167,6 +167,31 @@ Select "og-images" during setup.
 
 **See:** [packages/og-images/README.md](../packages/og-images/README.md)
 
+## Webapps Package
+
+**Status:** Optional  
+**Dependencies:** Core, Cursor AI
+
+Micro-apps capability with AI-native vibecoding workflow:
+- `SPEC.md` framework for app requirements
+- `index.html`/`css`/`js` templates for rapid prototyping
+- Integrated Cursor rule for AI-assisted development
+- Seamless deployment via Quartz Assets emitter
+
+**Installation:**
+Select "webapps" during setup.
+
+**Configuration:**
+1. Generate Cursor rules: `npm run setup:cursor`
+2. Create apps in `content/apps/`
+3. Link from any note: `[App Name](/apps/app-name/index.html)`
+
+**Files:**
+- `packages/webapps/template/`
+- `packages/cursor-rules-template/vibecode.mdc.template`
+
+**See:** [docs/WEBAPPS.md](WEBAPPS.md)
+
 ## Package Dependencies
 
 ```
@@ -175,7 +200,8 @@ Core (required)
 ├── Multilang (optional)
 ├── Analytics (optional)
 ├── Comments (optional)
-└── OG Images (optional)
+├── OG Images (optional)
+└── Webapps (optional)
 ```
 
 ## Adding Packages After Setup

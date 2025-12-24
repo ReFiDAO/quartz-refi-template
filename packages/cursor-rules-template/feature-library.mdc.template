@@ -1,0 +1,31 @@
+---
+alwaysApply: false
+description: Documentation of available UI elements, grids, and modular packages
+globs: ["content/**/*.md", "quartz/styles/**/*.scss"]
+---
+
+# Feature Library Reference
+
+This rule provides context for using the modular features of the ReFi template.
+
+## Available UI Elements (Grids & Sections)
+Refer to `docs/LIBRARY.md` and `docs/ELEMENTS-CATALOG.md` for full documentation.
+
+- **Buttons**: `.cta-button`
+- **Sections**: `.section-container`, `.section-container-tinted`, `.section-content-centered`
+- **Grids**: `.two-col-grid`, `.three-col-grid`, `.grid-item`
+
+## Styling Patterns
+All elements follow the canonical CSS variable system:
+- `--accent-dark`: Primary brand color
+- `--accent-medium`: Secondary brand color
+- `--accent-light`: Light accent/background
+- `--accent-highlight`: Subtlest tint (for sections)
+
+## Modular Packages
+- **Analytics**: Configured in `quartz.config.ts`.
+- **Comments**: Configured in `quartz.layout.ts` (Giscus).
+- **Multilang**: Build with `npm run build:multilang`.
+- **OG Images**: Automatic generation (slows builds).
+
+

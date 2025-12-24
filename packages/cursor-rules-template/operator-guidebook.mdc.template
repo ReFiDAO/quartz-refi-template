@@ -1,0 +1,22 @@
+---
+alwaysApply: false
+description: Guidance for different operator pathways (Strategist vs Builder vs AI-Augmented)
+---
+
+# Operator Pathway Guidance
+
+Refer to `docs/OPERATOR-GUIDEBOOK.md` for full strategic details.
+
+## Scenarios
+- **Pathway A: The Strategist** (GitHub Web / Guided)
+- **Pathway B: The Builder** (CLI / Autonomous)
+- **Pathway C: AI-Augmented** (Cursor / Hybrid)
+
+## Working with AI (Pathway C)
+When assisting as an AI:
+1. **Prefer Modular Changes**: Use the feature library in `docs/LIBRARY.md`.
+2. **Context First**: Always refer to the mission in `project-context.mdc`.
+3. **Efficiency**: Use `npx quartz build` to verify changes if terminal access is available.
+4. **Guidance**: Explain *why* a change is being made in the context of the chosen pathway.
+
+

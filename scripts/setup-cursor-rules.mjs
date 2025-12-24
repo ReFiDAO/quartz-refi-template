@@ -134,13 +134,13 @@ async function main() {
   // Template directory
   const templateDir = join(rootDir, "packages/cursor-rules-template")
 
-  // Generate project-overview.mdc
-  const projectOverviewTemplate = readFileSync(
-    join(templateDir, "project-overview.mdc.template"),
+  // Generate project-context.mdc
+  const projectContextTemplate = readFileSync(
+    join(templateDir, "project-context.mdc.template"),
     "utf-8"
   )
 
-  const projectOverview = projectOverviewTemplate
+  const projectContext = projectContextTemplate
     .replace(/\{\{SITE_NAME\}\}/g, siteName)
     .replace(/\{\{MISSION_DESCRIPTION\}\}/g, missionDescription)
     .replace(/\{\{MISSION_STATEMENT\}\}/g, missionStatement)
@@ -150,10 +150,40 @@ async function main() {
     .replace(/\{\{GITHUB_ORG\}\}/g, githubOrg)
     .replace(/\{\{GITHUB_REPO\}\}/g, githubRepo)
     .replace(/\{\{CONTACT_EMAIL\}\}/g, contactEmail)
-    .replace(/\{\{LAST_SYNC_DATE\}\}/g, new Date().toISOString().split("T")[0])
-    .replace(/\{\{CUSTOMIZATIONS\}\}/g, "Theme colors, content structure")
 
-  writeFileSync(join(cursorRulesDir, "project-overview.mdc"), projectOverview)
+  writeFileSync(join(cursorRulesDir, "project-context.mdc"), projectContext)
+
+  // Generate site-structure.mdc
+  const siteStructureTemplate = readFileSync(
+    join(templateDir, "site-structure.mdc.template"),
+    "utf-8"
+  )
+
+  const siteStructure = siteStructureTemplate
+    .replace(/\{\{BASE_URL\}\}/g, baseUrl)
+
+  writeFileSync(join(cursorRulesDir, "site-structure.mdc"), siteStructure)
+
+  // Generate module-index.mdc
+  const moduleIndexTemplate = readFileSync(
+    join(templateDir, "module-index.mdc.template"),
+    "utf-8"
+  )
+  writeFileSync(join(cursorRulesDir, "module-index.mdc"), moduleIndexTemplate)
+
+  // Generate feature-library.mdc
+  const featureLibraryTemplate = readFileSync(
+    join(templateDir, "feature-library.mdc.template"),
+    "utf-8"
+  )
+  writeFileSync(join(cursorRulesDir, "feature-library.mdc"), featureLibraryTemplate)
+
+  // Generate operator-guidebook.mdc
+  const operatorGuidebookTemplate = readFileSync(
+    join(templateDir, "operator-guidebook.mdc.template"),
+    "utf-8"
+  )
+  writeFileSync(join(cursorRulesDir, "operator-guidebook.mdc"), operatorGuidebookTemplate)
 
   // Generate site-customization.mdc
   const siteCustomizationTemplate = readFileSync(
@@ -188,68 +218,76 @@ async function main() {
 
   writeFileSync(join(cursorRulesDir, "upstream-sync.mdc"), upstreamSync)
 
+  // Generate vibecode.mdc if webapps package is installed
+  if (config.packages && config.packages.includes("webapps")) {
+    const vibecodeTemplatePath = join(templateDir, "vibecode.mdc.template")
+    if (existsSync(vibecodeTemplatePath)) {
+      const vibecodeTemplate = readFileSync(vibecodeTemplatePath, "utf-8")
+      const vibecode = vibecodeTemplate
+        .replace(/\{\{SITE_NAME\}\}/g, siteName)
+        .replace(/\{\{BASE_URL\}\}/g, baseUrl)
+        .replace(/\{\{APP_NAME\}\}/g, "your-app-name") // Placeholder for user
+      
+      writeFileSync(join(cursorRulesDir, "vibecode.mdc"), vibecode)
+      console.log("✅ Vibecode Cursor rule generated")
+    }
+  }
+
   // Copy README template
-  const readmeTemplate = `# Cursor Rules - ${siteName}
+  let readmeTemplate = `# Cursor Rules - ${siteName}
 
 **Repository:** ${siteName} Website  
 **Purpose:** Public website and digital presence  
 **Created:** ${new Date().toISOString().split("T")[0]}  
-**Rules:** 3 specialized context files
+**Rules:** 6 specialized context modules (MDC)
 
 ---
 
-## Available Rules
+## Available Modules
 
-### 1. **project-overview.mdc** (Always Applied)
-Loads automatically when working in this folder.
+### 1. **module-index.mdc** (Always Applied)
+The central index mapping all rules and key documentation.
 
-**Provides:**
-- ${siteName} organization context and mission
-- Team structure and roles
-- Core activities and initiatives
-- Website structure and navigation
-- Upstream relationship info
+### 2. **project-context.mdc** (Always Applied)
+**Provides:** ${siteName} organization mission, team, and activities.
 
-### 2. **site-customization.mdc**
+### 3. **site-structure.mdc** (Always Applied)
+**Provides:** Repository organization and deployment workflow.
+
+### 4. **feature-library.mdc**
+**Fetch with:** "library", "elements", "grids", "components"
+**Provides:** UI elements and modular package details.
+
+### 5. **operator-guidebook.mdc**
+**Fetch with:** "operator", "guidebook", "pathway", "manual"
+**Provides:** Strategic pathways (Strategist/Builder/AI) and collaboration guidance.
+
+### 6. **site-customization.mdc**
 **Fetch with:** "customize", "design", "theme", "styling"
+**Provides:** Design system and styling patterns.
 
-**Provides:**
-- Site-specific design system
-- Custom components
-- Content organization
-- Deployment configuration
-
-### 3. **upstream-sync.mdc**
-**Fetch with:** "upstream", "sync", "contribute", "merge"
-
-**Provides:**
-- Upstream repository URL
-- Sync frequency recommendations
-- How to pull updates
-- How to contribute back
+### 7. **upstream-sync.mdc**
+**Fetch with:** "upstream", "sync", "contribute"
+**Provides:** Template update instructions.
 
 ---
 
 ## Quick Reference
 
-**Working on design/styling:**
-- Auto-loaded overview + Fetch "site customization"
-- Reference: \`quartz/styles/custom.scss\` for all styling
+**Working on content:**
+- Reference: \`project-context.mdc\` + \`operator-guidebook.mdc\`
+- Edit: \`content/\` directory.
 
-**Adding/editing content:**
-- Fetch "project overview"
-- Edit: \`content/index.md\` for homepage
-- Preview: \`npx quartz build --serve\`
+**Working on design/styling:**
+- Reference: \`site-customization.mdc\` + \`feature-library.mdc\`
+- Edit: \`quartz/styles/custom.scss\`
 
 **Syncing from upstream:**
-- Fetch "upstream sync"
-- Process: \`git fetch upstream\` → \`git merge upstream/main\`
+- Reference: \`upstream-sync.mdc\`
 
 ---
-
 **These rules only apply when working in this repository.**
-
-For questions or updates, contact: ${contactEmail}
+For questions, contact: ${contactEmail}
 `
 
   writeFileSync(join(cursorRulesDir, "README.md"), readmeTemplate)

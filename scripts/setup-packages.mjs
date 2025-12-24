@@ -72,6 +72,11 @@ const PACKAGES = {
     description: "Custom Open Graph image generation (slows builds)",
     required: false,
   },
+  webapps: {
+    name: "Webapps",
+    description: "Micro-apps capability with AI-native vibecoding workflow",
+    required: false,
+  },
   theme: {
     name: "Theme",
     description: "Customizable theme architecture (always included)",
@@ -198,7 +203,7 @@ async function main() {
     if (pkg === "core" || pkg === "theme") continue
 
     console.log(`\n📦 Installing ${pkg}...`)
-    installPackage(pkg, siteName, baseUrl, defaultLocale, githubOrg, githubRepo)
+    await installPackage(pkg, siteName, baseUrl, defaultLocale, githubOrg, githubRepo)
   }
 
   // Install theme package
@@ -355,7 +360,7 @@ function installCorePackage(siteName, baseUrl, locale, githubOrg, githubRepo, pr
   console.log("✅ Core package installed")
 }
 
-function installPackage(pkgName, siteName, baseUrl, locale, githubOrg, githubRepo) {
+async function installPackage(pkgName, siteName, baseUrl, locale, githubOrg, githubRepo) {
   const pkgDir = join(rootDir, "packages", pkgName)
 
   if (!existsSync(pkgDir)) {
@@ -376,7 +381,52 @@ function installPackage(pkgName, siteName, baseUrl, locale, githubOrg, githubRep
     case "og-images":
       installOgImagesPackage()
       break
+    case "webapps":
+      await installWebappsPackage(pkgDir)
+      break
   }
+}
+
+async function installWebappsPackage(pkgDir) {
+  // Create content/apps directory if it doesn't exist
+  const appsDir = join(rootDir, "content", "apps")
+  if (!existsSync(appsDir)) mkdirSync(appsDir, { recursive: true })
+
+  // Copy template files to a 'starter' app folder if it doesn't exist
+  const starterAppDir = join(appsDir, "starter-app")
+  if (!existsSync(starterAppDir)) {
+    const templateDir = join(pkgDir, "template")
+    if (existsSync(templateDir)) {
+      cpSync(templateDir, starterAppDir, { recursive: true })
+      console.log("✅ Webapps starter app created in content/apps/starter-app")
+    }
+  }
+
+  // Ask about ReFi Orbifier
+  const shouldInstallOrbifier = await confirm({
+    message: "Would you like to install the ReFi Orbifier micro-app?",
+    initialValue: true,
+  })
+
+  if (shouldInstallOrbifier) {
+    const orbifierSrcDir = join(pkgDir, "apps", "refi-orbifier")
+    const orbifierDestDir = join(appsDir, "refi-orbifier")
+    
+    if (existsSync(orbifierSrcDir)) {
+      if (!existsSync(orbifierDestDir)) {
+        cpSync(orbifierSrcDir, orbifierDestDir, { recursive: true })
+        console.log("✅ ReFi Orbifier app installed in content/apps/refi-orbifier")
+      } else {
+        console.log("ℹ️  ReFi Orbifier app already exists, skipping installation")
+      }
+    }
+  }
+
+  // Note: vibecode.mdc.template will be handled by setup-cursor-rules.mjs
+  // when the user runs 'npm run setup:cursor'
+  
+  console.log("✅ Webapps package installed")
+  console.log("💡 Tip: Use 'npm run setup:cursor' to install the vibecode Cursor rule.")
 }
 
 function installMultilangPackage(pkgDir) {

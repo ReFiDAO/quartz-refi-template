@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+description: Core mission, activities, and team context for {{SITE_NAME}}
+---
+
+# {{SITE_NAME}} - Organization Context
+
+## Mission
+{{MISSION_STATEMENT}}
+
+## Context
+**{{SITE_NAME}}** is {{MISSION_DESCRIPTION}}
+
+## Core Activities
+{{CORE_ACTIVITIES}}
+
+## Core Team
+{{TEAM_MEMBERS}}
+
+## Contact & Links
+- **Primary Contact**: {{CONTACT_EMAIL}}
+- **Main Website**: https://{{BASE_URL}}
+- **GitHub Repository**: https://github.com/{{GITHUB_ORG}}/{{GITHUB_REPO}}
+
+

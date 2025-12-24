@@ -1,0 +1,88 @@
+/* 
+   Micro-app Minimalist Styling
+   Designed to complement the Quartz ReFi Design System
+*/
+
+:root {
+    --bg-color: #f9f9f9;
+    --text-color: #333;
+    --primary-color: #2e5491; /* Default Quartz Blue */
+    --card-bg: #fff;
+    --border-radius: 8px;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: var(--spacing);
+    display: flex;
+    justify-content: center;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: calc(var(--spacing) * 2);
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+#app-description {
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: calc(var(--spacing) * 1.5);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#result {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: calc(var(--spacing) * 2);
+    text-align: center;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+

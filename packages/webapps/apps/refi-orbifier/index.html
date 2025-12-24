@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReFi Orbifier</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../../static/icon.png">
+</head>
+<body>
+    <div id="app-container">
+        <header>
+            <div class="logo-container">
+                <span class="orb-icon">🟢</span>
+                <h1>ReFi Orbifier</h1>
+            </div>
+            <p id="app-description">Transform your PFP with the ReFi orb</p>
+        </header>
+
+        <main>
+            <section class="card" id="api-config">
+                <h2>1. remove.bg API Key</h2>
+                <div class="input-group">
+                    <input type="password" id="api-key" placeholder="Enter remove.bg API key">
+                    <button id="save-key">Save</button>
+                </div>
+                <p class="hint">Get your free API key at <a href="https://remove.bg" target="_blank">remove.bg</a> (50/month free)</p>
+                <p id="api-status"></p>
+            </section>
+
+            <section class="card" id="upload-section">
+                <h2>2. Upload Your Photo</h2>
+                <div id="drop-zone">
+                    <span class="upload-icon">📷</span>
+                    <p>Drop your photo here or click to browse</p>
+                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
+                </div>
+                <p class="hint">PNG, JPG, or WEBP up to 10MB</p>
+            </section>
+
+            <section class="card hidden" id="result-section">
+                <h2>3. Your Orbified PFP</h2>
+                <div id="canvas-container">
+                    <canvas id="orb-canvas"></canvas>
+                </div>
+                <div class="button-group">
+                    <button id="download-btn">Download PNG</button>
+                    <button id="share-btn">Share on X</button>
+                </div>
+                <button id="reset-btn" class="secondary">Create Another</button>
+            </section>
+
+            <div id="loading-overlay" class="hidden">
+                <div class="loader"></div>
+                <p>Processing your image...</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Made with 💚 for the ReFi community</p>
+            <p>Built by <a href="https://github.com/johnellison" target="_blank">@johnellison</a></p>
+            <a href="../../" class="back-link">← Back to Notes</a>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
